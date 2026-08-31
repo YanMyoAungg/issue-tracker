@@ -1,13 +1,38 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>IssueTracker</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>IssueTracker</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      No-flash theme: sets the dark-mode class on the root before first paint,
+      using the saved preference, or the OS preference when nothing is saved.
+      This prevents a flash of light theme before Angular hydrates.
+      Must match the `html.dark-mode` selector in material-theme.scss.
+    -->
+    <script>
+      (function () {
+        try {
+          var preferred = localStorage.getItem('theme');
+          var dark =
+            preferred === 'dark' ||
+            (preferred !== 'light' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark-mode', dark);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

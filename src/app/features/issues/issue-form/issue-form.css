@@ -1,0 +1,106 @@
+.issue-form {
+  max-width: 720px;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.issue-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mat-sys-secondary);
+}
+
+.issue-form__header h2 {
+  margin: 0;
+}
+
+.issue-form form {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 16px;
+  background: var(--mat-sys-surface-container-low);
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 10px;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.error {
+  color: var(--mat-sys-error);
+  font-size: 0.75rem;
+}
+
+.secondary-button,
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.secondary-button {
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+
+button {
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

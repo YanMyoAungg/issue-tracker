@@ -1,0 +1,44 @@
+<section class="issue-list" aria-label="Issue list">
+  <header class="issue-list__header">
+    <div>
+      <p class="eyebrow">Overview</p>
+      <h2>Issues</h2>
+    </div>
+
+    <a class="primary-button" routerLink="/issues/new">New issue</a>
+  </header>
+
+  @if (issues().length === 0) {
+    <div class="empty-state">
+      <p>No issues yet.</p>
+      <a class="primary-button" routerLink="/issues/new">Create the first issue</a>
+    </div>
+  } @else {
+    <ul class="issue-list__items">
+      @for (issue of issues(); track issue.id) {
+        <li class="issue-item">
+          <div class="issue-item__content">
+            <div class="issue-item__title-row">
+              <h3>{{ issue.title }}</h3>
+              <span class="badge badge--status">{{ issue.status }}</span>
+            </div>
+
+            <p>{{ issue.description }}</p>
+
+            <div class="issue-item__meta">
+              <span class="badge badge--priority">{{ issue.priority }}</span>
+              <span class="issue-date">{{ issue.createdAt | date: 'mediumDate' }}</span>
+            </div>
+          </div>
+
+          <div class="issue-item__actions">
+            <a class="secondary-button" [routerLink]="['/issues', issue.id]">Edit</a>
+            <button type="button" class="danger-button" (click)="deleteIssue(issue.id)">
+              Delete
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

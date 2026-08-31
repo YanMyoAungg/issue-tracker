@@ -1,0 +1,53 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.shell {
+  height: 100%;
+}
+
+/* Sidenav */
+.side-toolbar {
+  color: var(--mat-sys-primary);
+  background-color: var(--mat-sys-surface-container);
+}
+
+.side-toolbar .brand {
+  font-weight: 600;
+}
+
+.active-link {
+  color: var(--mat-sys-primary);
+}
+
+.active-link mat-icon {
+  color: var(--mat-sys-primary);
+}
+
+/* Top bar */
+.topbar {
+  gap: 0.5rem;
+}
+
+.app-title {
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Main content */
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  overflow: auto;
+  padding: 1.5rem;
+}
