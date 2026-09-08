@@ -33,32 +33,30 @@
     </main>
   </div>
 
-  <div hlmDrawerPortal>
-    <hlm-drawer-content>
-      <hlm-drawer-header>
-        <div hlmDrawerTitle>Issue Tracker</div>
-      </hlm-drawer-header>
-      <nav class="flex flex-col gap-2 px-4 pb-6" aria-label="Primary navigation">
-        <a
-          hlmBtn
-          variant="ghost"
-          routerLink="/issues"
-          routerLinkActive="bg-accent text-accent-foreground"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="justify-start"
-        >
-          Issues
-        </a>
-        <a
-          hlmBtn
-          variant="ghost"
-          routerLink="/issues/new"
-          routerLinkActive="bg-accent text-accent-foreground"
-          class="justify-start"
-        >
-          New issue
-        </a>
-      </nav>
-    </hlm-drawer-content>
-  </div>
+  <hlm-drawer-content class="text-popover-foreground" *hlmDrawerPortal="let ctx">
+    <hlm-drawer-header>
+      <h3 hlmDrawerTitle>Issue Tracker</h3>
+    </hlm-drawer-header>
+    <nav class="flex flex-col gap-2 px-4 pb-6" aria-label="Primary navigation">
+      <a
+        hlmBtn
+        variant="ghost"
+        routerLink="/issues"
+        routerLinkActive="bg-accent text-accent-foreground"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="w-full justify-start text-popover-foreground"
+      >
+        Issues
+      </a>
+      <a
+        hlmBtn
+        variant="ghost"
+        routerLink="/issues/new"
+        routerLinkActive="bg-accent text-accent-foreground"
+        class="w-full justify-start text-popover-foreground"
+      >
+        New issue
+      </a>
+    </nav>
+  </hlm-drawer-content>
 </hlm-drawer>
