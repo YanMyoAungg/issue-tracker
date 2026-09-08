@@ -1,14 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ButtonDirective } from 'primeng/button';
-import { Tag } from 'primeng/tag';
+
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 
 import { IssueService } from '../issue.service';
 
 @Component({
   selector: 'app-issue-list',
-  imports: [RouterLink, DatePipe, ButtonDirective, Tag],
+  imports: [RouterLink, DatePipe, HlmBadgeImports, HlmButtonImports],
   styleUrl: './issue-list.css',
   templateUrl: './issue-list.html',
 })

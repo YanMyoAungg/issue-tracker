@@ -5,38 +5,35 @@
       <h2 class="m-0 text-3xl font-semibold tracking-tight">Issues</h2>
     </div>
 
-    <a pButton routerLink="/issues/new">
-      <i class="pi pi-plus mr-2"></i>
-      New issue
-    </a>
+    <a hlmBtn routerLink="/issues/new">New issue</a>
   </header>
 
   @if (issues().length === 0) {
-    <div class="grid justify-items-start gap-4 rounded-2xl border border-dashed border-surface-300 bg-surface-0 p-8 dark:border-surface-700 dark:bg-surface-900">
-      <p class="m-0 text-surface-600 dark:text-surface-300">No issues yet.</p>
-      <a pButton routerLink="/issues/new">Create the first issue</a>
+    <div class="grid justify-items-start gap-4 rounded-2xl border border-dashed border-border bg-card p-8">
+      <p class="m-0 text-muted-foreground">No issues yet.</p>
+      <a hlmBtn routerLink="/issues/new">Create the first issue</a>
     </div>
   } @else {
     <ul class="m-0 grid list-none gap-4 p-0">
       @for (issue of issues(); track issue.id) {
-        <li class="flex flex-col justify-between gap-5 rounded-2xl border border-surface-200 bg-surface-0 p-5 shadow-sm dark:border-surface-800 dark:bg-surface-900 sm:flex-row">
+        <li class="flex flex-col justify-between gap-5 rounded-2xl border border-border bg-card p-5 shadow-sm sm:flex-row">
           <div class="grid min-w-0 flex-1 gap-3">
             <div class="flex flex-wrap items-center gap-3">
               <h3 class="m-0 text-lg font-semibold">{{ issue.title }}</h3>
-              <p-tag [value]="issue.status" severity="info" />
+              <span hlmBadge>{{ issue.status }}</span>
             </div>
 
-            <p class="m-0 leading-6 text-surface-600 dark:text-surface-300">{{ issue.description }}</p>
+            <p class="m-0 leading-6 text-muted-foreground">{{ issue.description }}</p>
 
             <div class="flex flex-wrap items-center gap-3">
-              <p-tag [value]="issue.priority" severity="secondary" />
-              <span class="text-sm text-surface-500">{{ issue.createdAt | date: 'mediumDate' }}</span>
+              <span hlmBadge variant="secondary">{{ issue.priority }}</span>
+              <span class="text-sm text-muted-foreground">{{ issue.createdAt | date: 'mediumDate' }}</span>
             </div>
           </div>
 
           <div class="flex shrink-0 items-center gap-2">
-            <a pButton severity="secondary" [outlined]="true" [routerLink]="['/issues', issue.id]">Edit</a>
-            <button pButton type="button" severity="danger" [outlined]="true" (click)="deleteIssue(issue.id)">
+            <a hlmBtn variant="outline" [routerLink]="['/issues', issue.id]">Edit</a>
+            <button hlmBtn variant="destructive" type="button" (click)="deleteIssue(issue.id)">
               Delete
             </button>
           </div>

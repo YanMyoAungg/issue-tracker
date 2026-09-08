@@ -1,12 +1,12 @@
 import { Component, effect, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ButtonDirective } from 'primeng/button';
-import { Drawer } from 'primeng/drawer';
-import { ToggleSwitch } from 'primeng/toggleswitch';
+
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmDrawerImports } from '@spartan-ng/helm/drawer';
+import { HlmSwitchImports } from '@spartan-ng/helm/switch';
 
 const THEME_KEY = 'theme';
-const DARK_CLASS = 'dark-mode';
+const DARK_CLASS = 'dark';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,9 @@ const DARK_CLASS = 'dark-mode';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    FormsModule,
-    ButtonDirective,
-    Drawer,
-    ToggleSwitch,
+    HlmButtonImports,
+    HlmDrawerImports,
+    HlmSwitchImports,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -25,7 +24,6 @@ const DARK_CLASS = 'dark-mode';
 export class App {
   protected readonly title = signal('Issue Tracker');
   protected darkMode = signal(this.readSavedPreference());
-  protected navigationOpen = signal(false);
 
   constructor() {
     effect(() => {
@@ -39,10 +37,6 @@ export class App {
         localStorage.setItem(THEME_KEY, this.darkMode() ? 'dark' : 'light');
       }
     });
-  }
-
-  protected toggleTheme(checked: boolean): void {
-    this.darkMode.set(checked);
   }
 
   /** Reads the saved preference; falls back to the OS color scheme. */
