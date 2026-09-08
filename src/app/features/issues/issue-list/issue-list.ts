@@ -2,11 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { HlmBadgeImports } from '@spartan-ng/helm/badge';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+
 import { IssueService } from '../issue.service';
 
 @Component({
   selector: 'app-issue-list',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, HlmBadgeImports, HlmButtonImports],
   styleUrl: './issue-list.css',
   templateUrl: './issue-list.html',
 })

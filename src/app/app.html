@@ -1,41 +1,54 @@
-<mat-sidenav-container class="shell">
-  <mat-sidenav #snav mode="over" fixedInViewport="true" fixedTopGap="0">
-    <mat-toolbar class="side-toolbar">
-      <span class="brand">Issue Tracker</span>
-    </mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/issues" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>bug_report</mat-icon>
-        <span matListItemTitle>Issues</span>
-      </a>
-      <a mat-list-item routerLink="/issues/new" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>add_circle_outline</mat-icon>
-        <span matListItemTitle>New Issue</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="content">
-    <mat-toolbar class="topbar">
-      <button mat-icon-button (click)="snav.toggle()" aria-label="Toggle navigation">
-        <mat-icon>menu</mat-icon>
+<hlm-drawer>
+  <div class="flex min-h-dvh flex-col bg-background text-foreground">
+    <header class="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-border bg-background/95 px-4 backdrop-blur sm:px-6">
+      <button hlmBtn variant="ghost" size="icon" hlmDrawerTrigger direction="left" type="button" aria-label="Toggle navigation">
+        <span aria-hidden="true">☰</span>
       </button>
-      <span class="app-title">{{ title() }}</span>
-      <span class="spacer"></span>
+      <span class="text-lg font-semibold tracking-tight">{{ title() }}</span>
+      <span class="flex-1"></span>
+      <label class="flex items-center gap-2 text-sm text-muted-foreground">
+        <span>{{ darkMode() ? 'Dark' : 'Light' }}</span>
+        <hlm-switch
+          [checked]="darkMode()"
+          (checkedChange)="darkMode.set($event)"
+          aria-label="Toggle dark mode"
+        />
+      </label>
+    </header>
 
-      <mat-slide-toggle
-        class="theme-toggle"
-        [checked]="darkMode()"
-        (change)="toggleTheme($event)"
-        color="primary"
-        aria-label="Toggle dark mode"
-      >
-        {{ darkMode() ? 'Dark' : 'Light' }}
-      </mat-slide-toggle>
-    </mat-toolbar>
-
-    <main class="main">
-      <router-outlet />
+    <main class="flex-1 overflow-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-5xl">
+        <router-outlet />
+      </div>
     </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+
+  <div hlmDrawerPortal>
+    <hlm-drawer-content>
+      <hlm-drawer-header>
+        <hlm-drawer-title>Issue Tracker</hlm-drawer-title>
+      </hlm-drawer-header>
+      <nav class="flex flex-col gap-2 px-4 pb-6" aria-label="Primary navigation">
+      <a
+        hlmBtn
+        variant="ghost"
+        routerLink="/issues"
+        routerLinkActive="bg-accent text-accent-foreground"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="justify-start"
+      >
+        Issues
+      </a>
+      <a
+        hlmBtn
+        variant="ghost"
+        routerLink="/issues/new"
+        routerLinkActive="bg-accent text-accent-foreground"
+        class="justify-start"
+      >
+        New issue
+      </a>
+      </nav>
+    </hlm-drawer-content>
+  </div>
+</hlm-drawer>

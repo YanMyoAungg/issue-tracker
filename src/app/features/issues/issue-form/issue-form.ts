@@ -5,9 +5,23 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import type { Issue, IssuePriority, IssueStatus } from '../issue.model';
 import { IssueService } from '../issue.service';
 
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmLabelImports } from '@spartan-ng/helm/label';
+import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
+
 @Component({
   selector: 'app-issue-form',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    HlmButtonImports,
+    HlmInputImports,
+    HlmLabelImports,
+    HlmSelectImports,
+    HlmTextareaImports,
+  ],
   styleUrl: './issue-form.css',
   templateUrl: './issue-form.html',
 })
@@ -19,6 +33,16 @@ export class IssueForm {
 
   protected readonly isEditing = signal(false);
   protected readonly issueId = signal<number | null>(null);
+  protected readonly statusOptions = [
+    { label: 'Open', value: 'open' as IssueStatus },
+    { label: 'In progress', value: 'in-progress' as IssueStatus },
+    { label: 'Closed', value: 'closed' as IssueStatus },
+  ];
+  protected readonly priorityOptions = [
+    { label: 'Low', value: 'low' as IssuePriority },
+    { label: 'Medium', value: 'medium' as IssuePriority },
+    { label: 'High', value: 'high' as IssuePriority },
+  ];
 
   protected readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
