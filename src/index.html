@@ -9,7 +9,7 @@
       No-flash theme: sets the dark-mode class on the root before first paint,
       using the saved preference, or the OS preference when nothing is saved.
       This prevents a flash of light theme before Angular hydrates.
-      Must match the `.dark-mode` selector used by the PrimeNG theme.
+      Must match the `.dark` selector used by the Spartan theme.
     -->
     <script>
       (function () {
@@ -17,9 +17,8 @@
           var preferred = localStorage.getItem('theme');
           var dark =
             preferred === 'dark' ||
-            (preferred !== 'light' &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches);
-          document.documentElement.classList.toggle('dark-mode', dark);
+            (preferred !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
         } catch (e) {}
       })();
     </script>

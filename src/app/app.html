@@ -1,61 +1,64 @@
-<div class="flex min-h-dvh flex-col bg-surface-0 text-surface-900 dark:bg-surface-950 dark:text-surface-0">
-  <p-drawer
-    [visible]="navigationOpen()"
-    (visibleChange)="navigationOpen.set($event)"
-    header="Issue Tracker"
-    [modal]="true"
-    styleClass="w-72"
-  >
-    <nav class="flex flex-col gap-2" aria-label="Primary navigation">
-      <a
-        pButton
-        routerLink="/issues"
-        routerLinkActive="bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-100"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="justify-start border-0 bg-transparent text-surface-700 hover:bg-surface-100 dark:text-surface-200 dark:hover:bg-surface-800"
-        (click)="navigationOpen.set(false)"
+<hlm-drawer>
+  <div class="flex min-h-dvh flex-col bg-background text-foreground">
+    <header
+      class="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-border bg-background/95 px-4 backdrop-blur sm:px-6"
+    >
+      <button
+        hlmBtn
+        variant="ghost"
+        size="icon"
+        hlmDrawerTrigger
+        direction="left"
+        type="button"
+        aria-label="Toggle navigation"
       >
-        <i class="pi pi-list mr-2"></i>
-        Issues
-      </a>
-      <a
-        pButton
-        routerLink="/issues/new"
-        routerLinkActive="bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-100"
-        class="justify-start border-0 bg-transparent text-surface-700 hover:bg-surface-100 dark:text-surface-200 dark:hover:bg-surface-800"
-        (click)="navigationOpen.set(false)"
-      >
-        <i class="pi pi-plus-circle mr-2"></i>
-        New issue
-      </a>
-    </nav>
-  </p-drawer>
+        <span aria-hidden="true">☰</span>
+      </button>
+      <span class="text-lg font-semibold tracking-tight">{{ title() }}</span>
+      <span class="flex-1"></span>
+      <label class="flex items-center gap-2 text-sm text-muted-foreground">
+        <span>{{ darkMode() ? 'Dark' : 'Light' }}</span>
+        <hlm-switch
+          [checked]="darkMode()"
+          (checkedChange)="darkMode.set($event)"
+          aria-label="Toggle dark mode"
+        />
+      </label>
+    </header>
 
-  <header class="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-surface-200 bg-surface-0/95 px-4 backdrop-blur dark:border-surface-800 dark:bg-surface-950/95 sm:px-6">
-    <button
-      pButton
-      type="button"
-      icon="pi pi-bars"
-      [text]="true"
-      severity="secondary"
-      aria-label="Toggle navigation"
-      (click)="navigationOpen.set(true)"
-    ></button>
-    <span class="text-lg font-semibold tracking-tight">{{ title() }}</span>
-    <span class="flex-1"></span>
-    <div class="flex items-center gap-2 text-sm text-surface-600 dark:text-surface-300">
-      <span>{{ darkMode() ? 'Dark' : 'Light' }}</span>
-      <p-toggleswitch
-        [ngModel]="darkMode()"
-        (ngModelChange)="toggleTheme($event)"
-        ariaLabel="Toggle dark mode"
-      />
-    </div>
-  </header>
+    <main class="flex-1 overflow-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-5xl">
+        <router-outlet />
+      </div>
+    </main>
+  </div>
 
-  <main class="flex-1 overflow-auto px-4 py-8 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-5xl">
-      <router-outlet />
-    </div>
-  </main>
-</div>
+  <div hlmDrawerPortal>
+    <hlm-drawer-content>
+      <hlm-drawer-header>
+        <div hlmDrawerTitle>Issue Tracker</div>
+      </hlm-drawer-header>
+      <nav class="flex flex-col gap-2 px-4 pb-6" aria-label="Primary navigation">
+        <a
+          hlmBtn
+          variant="ghost"
+          routerLink="/issues"
+          routerLinkActive="bg-accent text-accent-foreground"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="justify-start"
+        >
+          Issues
+        </a>
+        <a
+          hlmBtn
+          variant="ghost"
+          routerLink="/issues/new"
+          routerLinkActive="bg-accent text-accent-foreground"
+          class="justify-start"
+        >
+          New issue
+        </a>
+      </nav>
+    </hlm-drawer-content>
+  </div>
+</hlm-drawer>

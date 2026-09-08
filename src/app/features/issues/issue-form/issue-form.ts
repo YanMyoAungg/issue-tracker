@@ -4,14 +4,24 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import type { Issue, IssuePriority, IssueStatus } from '../issue.model';
 import { IssueService } from '../issue.service';
-import { ButtonDirective } from 'primeng/button';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
-import { Textarea } from 'primeng/textarea';
+
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmLabelImports } from '@spartan-ng/helm/label';
+import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmTextareaImports } from '@spartan-ng/helm/textarea';
 
 @Component({
   selector: 'app-issue-form',
-  imports: [ReactiveFormsModule, RouterLink, ButtonDirective, InputText, Select, Textarea],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    HlmButtonImports,
+    HlmInputImports,
+    HlmLabelImports,
+    HlmSelectImports,
+    HlmTextareaImports,
+  ],
   styleUrl: './issue-form.css',
   templateUrl: './issue-form.html',
 })
