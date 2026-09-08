@@ -1,12 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ButtonDirective } from 'primeng/button';
+import { Tag } from 'primeng/tag';
 
 import { IssueService } from '../issue.service';
 
 @Component({
   selector: 'app-issue-list',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, ButtonDirective, Tag],
   styleUrl: './issue-list.css',
   templateUrl: './issue-list.html',
 })

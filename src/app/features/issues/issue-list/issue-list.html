@@ -1,39 +1,42 @@
-<section class="issue-list" aria-label="Issue list">
-  <header class="issue-list__header">
+<section class="grid gap-6" aria-label="Issue list">
+  <header class="flex flex-wrap items-end justify-between gap-4">
     <div>
-      <p class="eyebrow">Overview</p>
-      <h2>Issues</h2>
+      <p class="mb-1 text-xs font-bold uppercase tracking-widest text-primary">Overview</p>
+      <h2 class="m-0 text-3xl font-semibold tracking-tight">Issues</h2>
     </div>
 
-    <a class="primary-button" routerLink="/issues/new">New issue</a>
+    <a pButton routerLink="/issues/new">
+      <i class="pi pi-plus mr-2"></i>
+      New issue
+    </a>
   </header>
 
   @if (issues().length === 0) {
-    <div class="empty-state">
-      <p>No issues yet.</p>
-      <a class="primary-button" routerLink="/issues/new">Create the first issue</a>
+    <div class="grid justify-items-start gap-4 rounded-2xl border border-dashed border-surface-300 bg-surface-0 p-8 dark:border-surface-700 dark:bg-surface-900">
+      <p class="m-0 text-surface-600 dark:text-surface-300">No issues yet.</p>
+      <a pButton routerLink="/issues/new">Create the first issue</a>
     </div>
   } @else {
-    <ul class="issue-list__items">
+    <ul class="m-0 grid list-none gap-4 p-0">
       @for (issue of issues(); track issue.id) {
-        <li class="issue-item">
-          <div class="issue-item__content">
-            <div class="issue-item__title-row">
-              <h3>{{ issue.title }}</h3>
-              <span class="badge badge--status">{{ issue.status }}</span>
+        <li class="flex flex-col justify-between gap-5 rounded-2xl border border-surface-200 bg-surface-0 p-5 shadow-sm dark:border-surface-800 dark:bg-surface-900 sm:flex-row">
+          <div class="grid min-w-0 flex-1 gap-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="m-0 text-lg font-semibold">{{ issue.title }}</h3>
+              <p-tag [value]="issue.status" severity="info" />
             </div>
 
-            <p>{{ issue.description }}</p>
+            <p class="m-0 leading-6 text-surface-600 dark:text-surface-300">{{ issue.description }}</p>
 
-            <div class="issue-item__meta">
-              <span class="badge badge--priority">{{ issue.priority }}</span>
-              <span class="issue-date">{{ issue.createdAt | date: 'mediumDate' }}</span>
+            <div class="flex flex-wrap items-center gap-3">
+              <p-tag [value]="issue.priority" severity="secondary" />
+              <span class="text-sm text-surface-500">{{ issue.createdAt | date: 'mediumDate' }}</span>
             </div>
           </div>
 
-          <div class="issue-item__actions">
-            <a class="secondary-button" [routerLink]="['/issues', issue.id]">Edit</a>
-            <button type="button" class="danger-button" (click)="deleteIssue(issue.id)">
+          <div class="flex shrink-0 items-center gap-2">
+            <a pButton severity="secondary" [outlined]="true" [routerLink]="['/issues', issue.id]">Edit</a>
+            <button pButton type="button" severity="danger" [outlined]="true" (click)="deleteIssue(issue.id)">
               Delete
             </button>
           </div>

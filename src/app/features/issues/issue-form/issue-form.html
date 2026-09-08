@@ -1,52 +1,58 @@
-<section class="issue-form" aria-label="Issue form">
-  <header class="issue-form__header">
+<section class="grid max-w-3xl gap-6" aria-label="Issue form">
+  <header class="flex flex-wrap items-end justify-between gap-4">
     <div>
-      <p class="eyebrow">{{ isEditing() ? 'Update' : 'Create' }}</p>
-      <h2>{{ isEditing() ? 'Edit issue' : 'New issue' }}</h2>
+      <p class="mb-1 text-xs font-bold uppercase tracking-widest text-primary">{{ isEditing() ? 'Update' : 'Create' }}</p>
+      <h2 class="m-0 text-3xl font-semibold tracking-tight">{{ isEditing() ? 'Edit issue' : 'New issue' }}</h2>
     </div>
 
-    <a class="secondary-button" routerLink="/issues">Back to list</a>
+    <a pButton severity="secondary" [outlined]="true" routerLink="/issues">Back to list</a>
   </header>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="field">
-      <label for="title">Title</label>
-      <input id="title" type="text" formControlName="title" />
+  <form class="grid gap-5 rounded-2xl border border-surface-200 bg-surface-0 p-5 shadow-sm dark:border-surface-800 dark:bg-surface-900 sm:p-7" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="grid gap-2">
+      <label class="font-medium" for="title">Title</label>
+      <input pInputText id="title" type="text" formControlName="title" class="w-full" />
       @if (form.controls.title.invalid && form.controls.title.touched) {
-        <small class="error">Title is required and must be at least 3 characters.</small>
+        <small class="text-sm text-red-600 dark:text-red-400">Title is required and must be at least 3 characters.</small>
       }
     </div>
 
-    <div class="field">
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description"></textarea>
+    <div class="grid gap-2">
+      <label class="font-medium" for="description">Description</label>
+      <textarea pTextarea id="description" formControlName="description" rows="6" class="w-full"></textarea>
       @if (form.controls.description.invalid && form.controls.description.touched) {
-        <small class="error">Description is required and must be at least 10 characters.</small>
+        <small class="text-sm text-red-600 dark:text-red-400">Description is required and must be at least 10 characters.</small>
       }
     </div>
 
-    <div class="field-row">
-      <div class="field">
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div class="grid gap-2">
         <label for="status">Status</label>
-        <select id="status" formControlName="status">
-          <option value="open">Open</option>
-          <option value="in-progress">In progress</option>
-          <option value="closed">Closed</option>
-        </select>
+        <p-select
+          inputId="status"
+          formControlName="status"
+          [options]="statusOptions"
+          optionLabel="label"
+          optionValue="value"
+          class="w-full"
+        />
       </div>
 
-      <div class="field">
+      <div class="grid gap-2">
         <label for="priority">Priority</label>
-        <select id="priority" formControlName="priority">
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
+        <p-select
+          inputId="priority"
+          formControlName="priority"
+          [options]="priorityOptions"
+          optionLabel="label"
+          optionValue="value"
+          class="w-full"
+        />
       </div>
     </div>
 
-    <div class="form-actions">
-      <button type="submit" [disabled]="form.invalid">
+    <div class="flex justify-end pt-2">
+      <button pButton type="submit" [disabled]="form.invalid">
         {{ isEditing() ? 'Save changes' : 'Create issue' }}
       </button>
     </div>

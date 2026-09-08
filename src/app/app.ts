@@ -1,11 +1,9 @@
 import { Component, effect, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ButtonDirective } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
+import { ToggleSwitch } from 'primeng/toggleswitch';
 
 const THEME_KEY = 'theme';
 const DARK_CLASS = 'dark-mode';
@@ -16,12 +14,10 @@ const DARK_CLASS = 'dark-mode';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSlideToggle,
+    FormsModule,
+    ButtonDirective,
+    Drawer,
+    ToggleSwitch,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -29,6 +25,7 @@ const DARK_CLASS = 'dark-mode';
 export class App {
   protected readonly title = signal('Issue Tracker');
   protected darkMode = signal(this.readSavedPreference());
+  protected navigationOpen = signal(false);
 
   constructor() {
     effect(() => {
@@ -44,8 +41,8 @@ export class App {
     });
   }
 
-  protected toggleTheme(event: MatSlideToggleChange): void {
-    this.darkMode.set(event.checked);
+  protected toggleTheme(checked: boolean): void {
+    this.darkMode.set(checked);
   }
 
   /** Reads the saved preference; falls back to the OS color scheme. */
